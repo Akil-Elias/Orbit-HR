@@ -3,7 +3,24 @@ const enum Gender {
     Female = "female"
 }
 
-const enum 
+class Position {
+    title: string;
+    department: Department;
+    division: Division;
+    supervisor: string;
+    directReports: Position[];
+    
+    constructor(
+        id: number,
+        title: string,
+        department: Department,
+        division: Division,
+        supervisor: string,
+        directReports: Position[],
+    ){
+        this.title = title
+    }
+}
 
 
 class Employee {
@@ -20,5 +37,7 @@ class Employee {
         //job info
         position: string,
 
-    )
+    ){
+
+    }
 }
