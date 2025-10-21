@@ -6,32 +6,63 @@ import (
 	"github.com/google/uuid"
 )
 
-type Address struct {
-	Street string
-	City   string
-}
-
 type Employee struct {
 	//personal info
 	ID            uuid.UUID
 	Firstname     string
 	Lastname      string
 	DOB           time.Time
-	Age           int64
+	Age           int64  // Do not store in DB
 	MaritalStatus string //Married, Single, Divorced, Widowed
 	Parent        string //Yes, No
-	Address       Address
+	street        string
+	city          string
 	//company info
-	JobTitle         Position   //from list of positions
-	Department       Department //from list
-	Division         Division   //from list
-	Location         string     //from list
+	Position         string //from list of positions
+	Department       string //from list
+	Division         string //from list
+	Location         string //from list
 	HireDate         time.Time
 	EmploymentStatus string //permanent, contract
-	YearsOfService   int64
+	Tenure           int64
 	Sick_Bal         int64
 	Casual_Bal       int64
 	Vacation_Bal     int64
 	RateOfPay        string //weekly, monthly
 	Salary           int64
+}
+
+func NewEmployee(
+	firstname string,
+	lastname string,
+	dob time.Time,
+	maritalStatus string,
+	parent string,
+	street string,
+	city string,
+	position string,
+	department string,
+	division string,
+	location string,
+	hireDate time.Time,
+	employmentStatus string,
+	tenure int64,
+) Employee {
+	return Employee{
+		ID:               uuid.New(),
+		Firstname:        firstname,
+		Lastname:         lastname,
+		DOB:              dob,
+		MaritalStatus:    maritalStatus,
+		Parent:           parent,
+		street:           street,
+		city:             city,
+		Position:         position,
+		Department:       department,
+		Division:         division,
+		Location:         location,
+		HireDate:         hireDate,
+		EmploymentStatus: employmentStatus,
+		Tenure:           tenure,
+	}
 }
