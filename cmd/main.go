@@ -1,13 +1,12 @@
 package main
 
 import (
-	"context"
+	"Orbit_HR/internal/database"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
 )
 
@@ -23,16 +22,7 @@ func main() {
 	dbKey := os.Getenv("DB_key")
 
 	//DB connection
-	dbpool, err := pgxpool.New(context.Background(), dbKey)
-	if err != nil {
-		log.Fatalf("Unable to create connection pool: %v\n", err)
-	}
-	defer dbpool.Close()
-
-	if err := dbpool.Ping(context.Background()); err != nil {
-		log.Fatalf("Unable to connect to database: %v\n", err)
-	}
-	fmt.Println("Database connected succesfully")
+	database.Conn(dbKey)
 
 	fmt.Println("running on" + port)
 	log.Fatal(http.ListenAndServe(port, nil))

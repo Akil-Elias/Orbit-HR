@@ -12,7 +12,6 @@ type Employee struct {
 	Firstname     string
 	Lastname      string
 	DOB           time.Time
-	Age           int64  // Do not store in DB
 	MaritalStatus string //Married, Single, Divorced, Widowed
 	Parent        string //Yes, No
 	street        string
@@ -24,7 +23,6 @@ type Employee struct {
 	Location         string //from list
 	HireDate         time.Time
 	EmploymentStatus string //permanent, contract
-	Tenure           int64
 	Sick_Bal         int64
 	Casual_Bal       int64
 	Vacation_Bal     int64
