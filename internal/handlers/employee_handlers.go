@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"Orbit_HR/internal/services"
 	"net/http"
 	"strconv"
 	"time"
@@ -27,7 +28,6 @@ func CreateEmployeeHandler(w http.ResponseWriter, r *http.Request) {
 	casual := r.FormValue("casual_leave_bal")
 	vacation := r.FormValue("vacation_leave_bal")
 	rop := r.FormValue("rate_of_pay")
-	salary := r.FormValue("salary")
 
 	dobStr := r.FormValue("dob")
 	dob, err := time.Parse("2006-01-02", dobStr) // Go's date layout for yyyy-mm-dd
@@ -67,4 +67,11 @@ func CreateEmployeeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	salary, err := strconv.ParseFloat(r.FormValue("salary"), 64)
+	if err != nil {
+		http.Error(w, "Invalid salary", http.StatusBadRequest)
+		return
+	}
+
+	employee := services.Employee{}
 }
